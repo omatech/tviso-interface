@@ -45,7 +45,6 @@ class Tviso extends AppBase {
 		if ($return_code == 0) {// ha fallat per timestamp, probablement un altre peticio d'un altre batch ha coincidit al mateix moment, fem retry
 			if ($insert_in_cache) {
 				$this->debug($this->type_of_cache . ":: insertamos el objeto $memcache_key \n");
-				$this->debug($attrs);
 				$this->setCache($memcache_key, $response_array);
 			}
 			return $response_array;
