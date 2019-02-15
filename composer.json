@@ -1,0 +1,14 @@
+{
+    "name": "omatech/tviso-interface",
+    "description": "Get tviso data and cache it",
+		"minimum-stability":"dev",	
+		"autoload": {
+				"psr-4": {
+						"Omatech\\": "src/Omatech"
+				}
+    },
+    "require": {
+		"php": ">=7.0 <7.3",
+    "doctrine/orm": "2.5.x-dev"
+    }
+}

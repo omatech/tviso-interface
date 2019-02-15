@@ -1,0 +1,16 @@
+Options -Indexes
+DirectoryIndex index.php
+RewriteEngine On
+
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+
+FileETag MTime Size
+<ifmodule mod_expires.c>
+<filesmatch "\.(jpg|gif|png|webp)$">
+ExpiresActive on
+ExpiresDefault "access plus 1 year"
+</filesmatch>
+</ifmodule>
