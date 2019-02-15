@@ -35,9 +35,11 @@ class Tviso extends AppBase {
 			if (!$response_array) {
 				$insert_in_cache = true;
 			} else {
+				$this->debug("CACHE::HIT!!!!\n");
 				return $response_array;
 			}
 		}
+		$this->debug("CACHE::MISS\n");
 
 		$response_array = $this->makeCURL($action, $params, $method);
 
