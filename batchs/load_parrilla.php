@@ -33,8 +33,8 @@ if ($token) {
 		echo "$date\n";
 		$response = $tviso->launch('/schedule/ES/calendar/' . $date . '/summary?mediaType=2&youtubeFallback=true&country=ES');
 		if ($response) {
-			//echo("Response size:".count($response)."\n");
-			echo "Response::: ".print_r($response, true)."\n";
+			echo("Response size:".count($response)."\n");
+			//echo "Response::: ".print_r($response, true)."\n";
 		} else {
 			echo $tviso->error . "\n";
 		}
