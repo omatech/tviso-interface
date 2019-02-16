@@ -24,6 +24,15 @@ class Tviso extends AppBase {
 			return false;
 		}
 	}
+	
+	function getCalendar ($date=null)
+	{
+		if ($date==null)
+		{
+			$date=date("Y-m-d");
+		}
+		return $this->launch('/schedule/ES/calendar/' . $date . '/summary?mediaType=2&youtubeFallback=true&country=ES');
+	}
 
 	function launch($action, $params = null, $method = 'GET') {
 		$this->debug('LAUNCH:::'.$action."\n");
