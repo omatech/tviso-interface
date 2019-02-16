@@ -59,7 +59,7 @@ class Tviso extends AppBase {
 	function makeCURL($action, $params = null, $method = 'GET') {
 		//TBD
 // falta user_token i auth_token
-
+$this->debug("makeCURL $action $method \n");
 		$action = $action . '&auth_token=' . $this->auth_token;
 		$action = $action . '&user_token=' . $this->user_token;
 
@@ -73,8 +73,6 @@ class Tviso extends AppBase {
 			CURLOPT_URL => $this->api_base . $action,
 			CURLOPT_USERAGENT => 'Standard cURL Request'
 		));
-
-
 
 		$header = array();
 		curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
