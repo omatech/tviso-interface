@@ -131,7 +131,7 @@ class Tviso extends AppBase {
 		$mida_pixels = $duracion_minutos * $factor;
 
 		$this->debug("start=$start end=$end unix_start=$unix_start unix_end=$unix_end duracion_minutos=$duracion_minutos mida_pixels=$mida_pixels\n");
-		$pct_dia = ($mida_pixels/7680) * 100;
+		$pct_dia = ($mida_pixels / 7680) * 100;
 		$result['pct_dia'] = $pct_dia;
 		return $result;
 	}
@@ -146,33 +146,34 @@ class Tviso extends AppBase {
 		return $result;
 	}
 
-	function array2Html($array) {
+	function dayArray2Html($array) 
+	{
 		$html = '';
-		foreach ($array as $channel_name=>$channel) {
-			
-			$html .= '<li class="fila-canal" id="'.$channel_name.'">
+		foreach ($array as $channel_name => $channel) {
+
+
+			if ($channel) {
+				$html .= '<li class="fila-canal" id="' . $channel_name . '">
 ';
-			$program_index=0;
-			foreach ($channel as $programa) {
-				//print_r($programa);die;
-				$time_info = $this->getTimeInfo($programa);
-				$resum_info = $this->getResumInfo($programa);
-				$categoria='SIN CATEGORÍA';
-				if (isset($programa['c']))
-				{
-					$categoria=$programa['c'];
-				}
-				
-				$margin_program='';
-				if ($program_index==0)
-				{
-					$margin_program=' margin-left: 0.347%;';
-				}
-				
+				$program_index = 0;
+				foreach ($channel as $programa) {
+					//print_r($programa);die;
+					$time_info = $this->getTimeInfo($programa);
+					$resum_info = $this->getResumInfo($programa);
+					$categoria = 'SIN CATEGORÍA';
+					if (isset($programa['c'])) {
+						$categoria = $programa['c'];
+					}
+
+					$margin_program = '';
+					if ($program_index == 0) {
+						$margin_program = ' margin-left: 0.347%;';
+					}
+
 //$html .= '  <!-- FILA CANAL -->';
 //$html.='<!-- .programa item -->';
-				$html.='
-    <div class="programa-item" style="width: ' . $time_info['pct_dia'] . '%;'.$margin_program.'">
+					$html .= '
+    <div class="programa-item" style="width: ' . $time_info['pct_dia'] . '%;' . $margin_program . '">
       <div class="programa-info">
         <span class="categoria">' . $categoria . '</span>
         <h3 class="titulo-programa"><a href="">' . $programa['tit'] . '</a></h3>
@@ -185,12 +186,13 @@ class Tviso extends AppBase {
     </div>
 		';
 //$html.='<!-- .programa item -->';
-				
-				$program_index++;
-			}
-			$html .= '
+
+					$program_index++;
+				}
+				$html .= '
   </li>
 	';
+			}
 //$html.='<!-- .FILA CANAL -->';
 		}
 		return $html;
