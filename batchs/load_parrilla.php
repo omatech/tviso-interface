@@ -18,6 +18,8 @@ $start_microtime = microtime(true);
 
 $total = 0;
 
+$days=1;
+
 use Omatech\Tviso\Tviso;
 
 date_default_timezone_set('Europe/Madrid');
@@ -27,7 +29,7 @@ if ($token) {
 	// Start date
 	$date = date("Y-m-d");
 	// End date
-	$end_date = date("Y-m-d", strtotime("+3 day", strtotime($date)));
+	$end_date = date("Y-m-d", strtotime("+$days day", strtotime($date)));
 
 	while (strtotime($date) <= strtotime($end_date)) {
 		echo "$date\n";
@@ -35,6 +37,11 @@ if ($token) {
 		if ($response) {
 			echo("Response size:".count($response)."\n");
 			//echo "Response::: ".print_r($response, true)."\n";
+			$html=$tviso->array2Html($response);
+			if ($html)
+			{
+				echo $html;
+			}
 		} else {
 			echo $tviso->error . "\n";
 		}
