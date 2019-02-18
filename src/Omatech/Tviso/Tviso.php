@@ -148,10 +148,10 @@ class Tviso extends AppBase {
 
 	function array2Html($array) {
 		$html = '';
-		foreach ($array as $channel) {
-			$html .= '<li class="fila-canal">
+		foreach ($array as $channel_name=>$channel) {
+			
+			$html .= '<li class="fila-canal" id="'.$channel_name.'">
 ';
-
 			$program_index=0;
 			foreach ($channel as $programa) {
 				//print_r($programa);die;
