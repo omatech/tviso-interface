@@ -169,26 +169,29 @@ class Tviso extends AppBase {
 					$margin_program=' margin-left: 0.347%;';
 				}
 				
-				$html .= '  <!-- FILA CANAL -->
-    <!-- programa item -->
+//$html .= '  <!-- FILA CANAL -->';
+//$html.='<!-- .programa item -->';
+				$html.='
     <div class="programa-item" style="width: ' . $time_info['pct_dia'] . '%;'.$margin_program.'">
       <div class="programa-info">
         <span class="categoria">' . $categoria . '</span>
         <h3 class="titulo-programa"><a href="">' . $programa['tit'] . '</a></h3>
         <p>' . $resum_info['resum'] . '</p>
         <ul class="meta">
-          <li class="duracion">' . $time_info['duracion_minutos'] . '</li>
+          <li class="duracion">' . $time_info['duracion_minutos'] . ' minutos</li>
           <li class="horario">' . $time_info['hora_inicio'] . '-' . $time_info['hora_final'] . '</li>
         </ul>
       </div>
     </div>
-    <!-- .programa item -->';
+		';
+//$html.='<!-- .programa item -->';
+				
 				$program_index++;
 			}
 			$html .= '
   </li>
-  <!-- .FILA CANAL -->
-';
+	';
+//$html.='<!-- .FILA CANAL -->';
 		}
 		return $html;
 	}
