@@ -47,8 +47,8 @@ class AppBase {
 			$this->conn = $conn;
 		}
 		$ret=$this->setupCache();
-		echo "setupcache\n";
-		var_dump($ret);
+		//echo "setupcache\n";
+		//var_dump($ret);
 	}
 	
 	
