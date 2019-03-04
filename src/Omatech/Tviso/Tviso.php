@@ -12,6 +12,7 @@ class Tviso extends AppBase {
 	var $error = '';
 	var $user_token = '';
 	var $auth_token = '';
+	var $cache_key_prefix = '';
 
 	function getToken() {
 		$response_array = $this->makeCURL('/auth_token?id_api=' . $this->id_api . '&secret=' . $this->secret);
@@ -36,7 +37,7 @@ class Tviso extends AppBase {
 		$this->debug('LAUNCH:::' . $action . "\n");
 		$insert_in_cache = false;
 		if ($this->mc !== null) {
-			$memcache_key = $this->conn->getDatabase() . ":array:$method:$action:" . serialize($params);
+			$memcache_key = $this->cache_key_prefix . ":array:$method:$action:" . serialize($params);
 			$this->debug("memcache_key==$memcache_key\n");
 			$response_array = $this->mc->get($memcache_key);
 			if (!$response_array) {

@@ -7,6 +7,7 @@ $tviso_params = [
 	, 'user_token'=>''
 	, 'show_inmediate_debug'=>true
 	, 'debug'=>true
+	, 'cache_key_prefix'=>'lavanguardia'
 ];
 define('DBHOST', 'localhost');
 define('DBNAME', 'tviso');
