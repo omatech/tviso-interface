@@ -42,7 +42,10 @@ class AppBase {
 			//print_r($conn);
 			$conn = \Doctrine\DBAL\DriverManager::getConnection($conn, $config);
 		}
-		$this->conn = $conn;
+		if ($conn!=null && !empty($conn))
+		{
+			$this->conn = $conn;
+		}
 		$ret=$this->setupCache();
 		echo "setupcache\n";
 		var_dump($ret);
