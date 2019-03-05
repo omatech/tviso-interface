@@ -13,6 +13,7 @@ class Tviso extends AppBase {
 	var $user_token = '';
 	var $auth_token = '';
 	var $cache_key_prefix = '';
+	var $calendar='';
 
 	function getToken() {
 		$response_array = $this->makeCURL('/auth_token?id_api=' . $this->id_api . '&secret=' . $this->secret);
@@ -30,7 +31,8 @@ class Tviso extends AppBase {
 		if ($date == null) {
 			$date = date("Y-m-d");
 		}
-		return $this->launch('/schedule/ES/calendar/' . $date . '/summary?mediaType=2&youtubeFallback=true&country=ES');
+		$this->calendar=$this->launch('/schedule/ES/calendar/' . $date . '/summary?mediaType=2&youtubeFallback=true&country=ES');
+		return $this->calendar;
 	}
 
 	function launch($action, $params = null, $method = 'GET') {
