@@ -134,7 +134,7 @@ class Tviso extends AppBase {
 		$mida_pixels = $duracion_minutos * $factor;
 
 		$this->debug("start=$start end=$end unix_start=$unix_start unix_end=$unix_end duracion_minutos=$duracion_minutos mida_pixels=$mida_pixels\n");
-		$pct_dia = ($mida_pixels / 7680) * 100;
+		$pct_dia = round(($mida_pixels / 7680) * 100, 4);
 		$result['pct_dia'] = $pct_dia;
 		return $result;
 	}
