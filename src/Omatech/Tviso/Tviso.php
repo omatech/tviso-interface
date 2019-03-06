@@ -22,9 +22,13 @@ class Tviso extends AppBase {
 			$this->auth_token = $response_array['auth_token'];
 			$memcache_key = $this->cache_key_prefix . ":tviso-token";
 			$this->setCache($memcache_key, $this->auth_token);
+			
+			$this->debug("Saving TVISO Token to cache $memcache_key=$this->auth_token\n");
+			
 			return $response_array['auth_token'];
 		} else {
 			$this->error = 'Auth error ' . print_r($response_array, true);
+			$this->debug("ERROR: $this->error\n");
 			return false;
 		}
 	}
@@ -41,8 +45,8 @@ class Tviso extends AppBase {
 		$this->debug('LAUNCH:::' . $action . "\n");
 		$insert_in_cache = false;
 		if ($this->mc !== null) {
-			$memcache_key = $this->cache_key_prefix . ":array:$method:$action:";
-			$this->debug("memcache_key==$memcache_key\n");
+			$memcache_key = $this->cache_key_prefix . ":array:$method:$action";
+			$this->debug("memcache_key=$memcache_key\n");
 			$response_array = $this->mc->get($memcache_key);
 			if (!$response_array) {
 				$insert_in_cache = true;
@@ -74,9 +78,11 @@ class Tviso extends AppBase {
 		$this->debug("makeCURL $action $method \n");
 		if ($this->auth_token=='')
 		{
+			$this->debug("We don't have tviso token in the class let's look in the cache\n");
 			$memcache_key = $this->cache_key_prefix . ":tviso-token";
 			$this->auth_token = $this->mc->get($memcache_key);
 		}
+		$this->debug("auth_token=$this->auth_token user_token=$this->user_token\n");
 		$action = $action . '&auth_token=' . $this->auth_token;
 		$action = $action . '&user_token=' . $this->user_token;
 
