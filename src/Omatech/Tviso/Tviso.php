@@ -20,6 +20,8 @@ class Tviso extends AppBase {
 		$auth_return_code = $response_array['error'];
 		if ($auth_return_code == 0) {
 			$this->auth_token = $response_array['auth_token'];
+			$memcache_key = $this->cache_key_prefix . ":tviso-token";
+			$this->setCache($memcache_key, $this->auth_token);
 			return $response_array['auth_token'];
 		} else {
 			$this->error = 'Auth error ' . print_r($response_array, true);
@@ -54,7 +56,7 @@ class Tviso extends AppBase {
 		$response_array = $this->makeCURL($action, $params, $method);
 
 		$return_code = $response_array['error'];
-		if ($return_code == 0) {// ha fallat per timestamp, probablement un altre peticio d'un altre batch ha coincidit al mateix moment, fem retry
+		if ($return_code == 0) {
 			if ($insert_in_cache) {
 				$this->debug($this->type_of_cache . ":: insertamos el objeto $memcache_key \n");
 				$this->setCache($memcache_key, $response_array);
@@ -70,6 +72,11 @@ class Tviso extends AppBase {
 		//TBD
 // falta user_token i auth_token
 		$this->debug("makeCURL $action $method \n");
+		if ($this->auth_token=='')
+		{
+			$memcache_key = $this->cache_key_prefix . ":tviso-token";
+			$this->auth_token = $this->mc->get($memcache_key);
+		}
 		$action = $action . '&auth_token=' . $this->auth_token;
 		$action = $action . '&user_token=' . $this->user_token;
 
