@@ -41,7 +41,7 @@ class Tviso extends AppBase {
 		$this->debug('LAUNCH:::' . $action . "\n");
 		$insert_in_cache = false;
 		if ($this->mc !== null) {
-			$memcache_key = $this->cache_key_prefix . ":array:$method:$action:" . serialize($params);
+			$memcache_key = $this->cache_key_prefix . ":array:$method:$action:";
 			$this->debug("memcache_key==$memcache_key\n");
 			$response_array = $this->mc->get($memcache_key);
 			if (!$response_array) {
