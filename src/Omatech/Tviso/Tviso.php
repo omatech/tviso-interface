@@ -161,10 +161,25 @@ class Tviso extends AppBase {
 		}
 		return $result;
 	}
+	
+	function filterChannels($channels_array)
+	{
+		$array=$this->calendar;
+		$res=array();
+		foreach ($array as $channel_name => $channel) {
+			if (in_array($channel_name, $channels_array))
+			{
+				$res[$channel_name]=$channel;
+			}
+		}	
+		$this->calendar=$res;
+		return $res;
+	}
 
-	function dayArray2Html($array) 
+	function dayArray2Html() 
 	{
 		$html = '';
+		$array=$this->calendar;
 		foreach ($array as $channel_name => $channel) {
 
 

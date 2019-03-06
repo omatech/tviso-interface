@@ -37,7 +37,7 @@ if ($token) {
 		if ($response) {
 			echo("Response size:".count($response)."\n");
 			//echo "Response::: ".print_r($response, true)."\n";
-			$html=$tviso->dayArray2Html($response);
+			$html=$tviso->dayArray2Html();
 			if ($html)
 			{
 				echo $html;
